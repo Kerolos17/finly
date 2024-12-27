@@ -23,9 +23,7 @@ const Profile = () => {
 
   const handleLogout = () => {
     dispatch(setLogout());
-    if (typeof window !== "undefined") {
-      localStorage.removeItem("userData");
-    }
+    localStorage.removeItem("userData");
     route.push("/");
   };
 
@@ -33,9 +31,7 @@ const Profile = () => {
     // Logic to handle field editing
     const updatedUserData = { ...userData, [field]: value };
     dispatch(setLogin({ token: userToken, userData: updatedUserData }));
-    if (typeof window !== "undefined") {
-      localStorage.setItem("userData", JSON.stringify(updatedUserData));
-    }
+    localStorage.setItem("userData", JSON.stringify(updatedUserData));
   };
 
   useEffect(() => {
@@ -49,9 +45,7 @@ const Profile = () => {
         .then((response) => response.json())
         .then((data) => {
           dispatch(setLogin({ token: userToken, userData: data.data }));
-          if (typeof window !== "undefined") {
-            localStorage.setItem("userData", JSON.stringify(data.data));
-          }
+          localStorage.setItem("userData", JSON.stringify(data.data));
           dispatch(setLoading(false));
         })
         .catch((error) => {
